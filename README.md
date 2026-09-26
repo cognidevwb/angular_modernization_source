@@ -8,6 +8,8 @@ web UI**, a real, production AngularJS application, unchanged.
 - **License:** Apache License 2.0 (see `LICENSE`). Copyright © 2016-2020 The ThingsBoard Authors.
   The files are as upstream wrote them; only this README was added.
 
+**Target:** the same application rewritten as an Angular 22 app is [`angular_modernization_target`](https://github.com/cognidevwb/angular_modernization_target).
+
 ## What it is
 
 | | |
