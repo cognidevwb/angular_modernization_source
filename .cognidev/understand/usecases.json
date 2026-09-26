@@ -1,0 +1,390 @@
+{
+  "domain": "Multi-tenant IoT device management and monitoring platform (web console)",
+  "summary": "This application is the web console for an IoT platform that lets organizations connect physical devices and assets, ingest and process the data they generate, and visualize that data on live dashboards. It serves several kinds of users within a multi-tenant structure: system administrators who run the platform and configure tenants, tenant administrators who onboard devices/assets and build the data-processing logic, and customers or operators who view dashboards, watch real-time telemetry over live subscriptions, receive alarms, and even remotely control connected equipment.\n\nThe core problems it solves are: getting devices and external systems (via HTTP, MQTT, Modbus, OPC-UA gateways) connected and credentialed; defining rule chains that filter, route, and transform incoming device data; turning that data into visual dashboards (digital gauges, maps, hierarchy trees, tables, trip animations) with live aggregation (min/max/avg/sum) that can be shared privately with customers through scoped 'entity views' or published as public links; surfacing problems quickly through alarms and audit/event logs; and letting operators interact back with devices through remote-control widgets (knobs, switches, multi-input forms, indicator lights) that issue RPC commands.\n\nStructurally, the product is organized around a small set of core business objects \u2014 tenants, customers, devices, assets, entity views, and users \u2014 each with its own management screens; a dashboard/widget layer for real-time data visualization and interaction; a rule-chain layer for data processing logic; and administrative/audit layers for platform configuration, security, and traceability. Together these pieces let an organization go from 'a physical device sends data' to 'a business user sees a chart and can act on it.'",
+  "useCases": [
+    {
+      "id": "authenticate-login",
+      "title": "Log in to the platform",
+      "actor": "Account holder",
+      "description": "A registered user signs in with their credentials to access their tenant or customer workspace, and can recover access if they forget their password.",
+      "steps": [
+        "User enters username and password on the login screen",
+        "Credentials are submitted to the authentication endpoint",
+        "Platform issues a session/auth token",
+        "User is redirected to their home landing page",
+        "User can request a password reset or activate a new account via an emailed link if needed"
+      ],
+      "evidence": "POST /api/auth/login, POST /api/auth/logout, POST /api/auth/token; server.js /api/* routing",
+      "files": [
+        "src/app/login/login.controller.js",
+        "src/app/login/login.routes.js",
+        "src/app/login/reset-password-request.controller.js",
+        "src/app/login/create-password.controller.js"
+      ],
+      "folders": [
+        "src/app/login"
+      ]
+    },
+    {
+      "id": "manage-devices",
+      "title": "Register and manage IoT devices",
+      "actor": "Tenant administrator",
+      "description": "Add new devices to the platform, obtain their connection credentials, and assign them to the customers that own them.",
+      "steps": [
+        "Administrator adds a new device with a name and type",
+        "Platform generates device credentials used to connect the physical device",
+        "Administrator views/manages the credentials to configure the device",
+        "Administrator assigns the device (individually or in bulk) to a customer",
+        "Device appears in a browsable device list/card grid for ongoing management"
+      ],
+      "evidence": "DeviceController, DeviceCardController (src/app/device/device.controller.js), ManageDeviceCredentialsController, AssignDeviceToCustomerController",
+      "files": [
+        "src/app/device/device.controller.js",
+        "src/app/device/add-device.tpl.html",
+        "src/app/device/device-credentials.controller.js",
+        "src/app/device/assign-to-customer.controller.js",
+        "src/app/device/add-devices-to-customer.controller.js"
+      ],
+      "folders": [
+        "src/app/device"
+      ]
+    },
+    {
+      "id": "manage-assets",
+      "title": "Register and manage assets",
+      "actor": "Tenant administrator",
+      "description": "Track non-device entities (buildings, fleets, sites) in the platform and assign them to customers.",
+      "steps": [
+        "Administrator registers a new asset",
+        "Administrator browses assets in a list/card view",
+        "Administrator assigns an asset (individually or in bulk) to a customer"
+      ],
+      "evidence": "AssetController, AssetCardController (src/app/asset/asset.controller.js), AssignAssetToCustomerController",
+      "files": [
+        "src/app/asset/asset.controller.js",
+        "src/app/asset/add-asset.tpl.html",
+        "src/app/asset/add-assets-to-customer.controller.js"
+      ],
+      "folders": [
+        "src/app/asset"
+      ]
+    },
+    {
+      "id": "entity-views",
+      "title": "Create and share scoped entity views with customers",
+      "actor": "Tenant administrator",
+      "description": "Create restricted views into a device's or asset's data and grant customers access without exposing the full entity.",
+      "steps": [
+        "Administrator creates an entity view over a device or asset",
+        "Administrator assigns the entity view to a customer",
+        "Multiple entity views can be bulk-added to a customer",
+        "Administrator browses the list of existing entity views"
+      ],
+      "evidence": "EntityViewController, EntityViewCardController (src/app/entity-view/entity-view.controller.js), AssignEntityViewToCustomerController",
+      "files": [
+        "src/app/entity-view/entity-view.controller.js",
+        "src/app/entity-view/add-entity-view.tpl.html",
+        "src/app/entity-view/assign-to-customer.controller.js",
+        "src/app/entity-view/add-entity-views-to-customer.controller.js"
+      ],
+      "folders": [
+        "src/app/entity-view"
+      ]
+    },
+    {
+      "id": "build-dashboards",
+      "title": "Build and organize dashboards",
+      "actor": "Dashboard designer",
+      "description": "Create dashboards, define their internal navigation states, and arrange widget layouts to present device data.",
+      "steps": [
+        "Designer creates a new dashboard (DashboardsController)",
+        "Designer defines dashboard states/views (e.g. default, entity-specific) for navigation",
+        "Designer arranges widgets across one or more layouts (e.g. main/right) inside the dashboard directive",
+        "Designer configures dashboard settings such as title and time window",
+        "Dashboard is saved and listed for browsing/opening via dashboard cards"
+      ],
+      "evidence": "DashboardsController, DashboardCardController (src/app/dashboard/dashboards.controller.js), Dashboard/DashboardController (src/app/components/dashboard.directive.js), DashboardStateDialogController, ManageDashboardLayoutsController",
+      "files": [
+        "src/app/dashboard/dashboards.controller.js",
+        "src/app/components/dashboard.directive.js",
+        "src/app/dashboard/add-dashboard.tpl.html",
+        "src/app/dashboard/states/default-state-controller.js",
+        "src/app/dashboard/states/entity-state-controller.js",
+        "src/app/dashboard/layouts/manage-dashboard-layouts.controller.js",
+        "src/app/dashboard/layouts/dashboard-layout.directive.js"
+      ],
+      "folders": [
+        "src/app/components",
+        "src/app/dashboard",
+        "src/app/dashboard/layouts",
+        "src/app/dashboard/states"
+      ]
+    },
+    {
+      "id": "publish-dashboard-publicly",
+      "title": "Publish a dashboard as a public link",
+      "actor": "Tenant administrator",
+      "description": "Make a dashboard accessible via a public, unauthenticated link so it can be shared outside the platform (e.g. on a public display or with an external stakeholder).",
+      "steps": [
+        "Administrator opens the dashboard's sharing options",
+        "Administrator confirms making the dashboard public via the public-dashboard dialog",
+        "Platform generates a public URL for the dashboard",
+        "Anyone with the link can view the dashboard without logging in"
+      ],
+      "evidence": "MakeDashboardPublicDialogController (src/app/dashboard/dashboards.controller.js)",
+      "files": [
+        "src/app/dashboard/dashboards.controller.js"
+      ],
+      "folders": [
+        "src/app/dashboard"
+      ]
+    },
+    {
+      "id": "configure-widgets",
+      "title": "Add and configure dashboard widgets",
+      "actor": "Dashboard designer",
+      "description": "Select, add, and configure the visualization widgets that show on a dashboard, or design new custom widget types.",
+      "steps": [
+        "Designer picks a widget type from the widget library/bundle",
+        "Widget is added onto the dashboard canvas",
+        "Designer binds the widget to a data source entity and configures its data keys",
+        "Designer customizes settings/appearance via an auto-generated JSON schema form",
+        "Widget configuration is saved to the dashboard"
+      ],
+      "evidence": "AddWidgetController, WidgetEditorController, JsonForm (src/app/components/json-form.directive.js), widget-utils helpers (createLink, createButton, fillPattern)",
+      "files": [
+        "src/app/dashboard/add-widget.controller.js",
+        "src/app/widget/widget-editor.controller.js",
+        "src/app/widget/select-widget-type.controller.js",
+        "src/app/components/json-form.directive.js",
+        "src/app/widget/lib/widget-utils.js"
+      ],
+      "folders": [
+        "src/app/components",
+        "src/app/dashboard",
+        "src/app/widget",
+        "src/app/widget/lib"
+      ]
+    },
+    {
+      "id": "visualize-telemetry",
+      "title": "Visualize live and historical device telemetry",
+      "actor": "Customer",
+      "description": "View real-time and historical device/asset data rendered as digital gauges, maps, entity hierarchy trees, tables, and trip animations, with live min/max/avg/sum aggregation computed as new data arrives.",
+      "steps": [
+        "Customer opens a dashboard containing telemetry widgets",
+        "Widget subscribes to a real-time telemetry data source (DatasourceService/DatasourceSubscription)",
+        "Incoming values are aggregated (min, max, avg, sum, count) as they stream in",
+        "Data renders as a digital gauge, Google/image map, entity hierarchy tree, timeseries table, or trip animation replay",
+        "Customer selects a date/time range to review historical data",
+        "Widget continues updating live as new telemetry arrives"
+      ],
+      "evidence": "CanvasDigitalGauge, DataAggregator (src/app/api/data-aggregator.js), Subscription (src/app/api/subscription.js), DatasourceService, TbMapWidget/TbMapWidgetV2, TbImageMap, EntitiesHierarchyWidget, TimeseriesTableWidget, tripAnimationWidget, EntitiesTableWidget",
+      "files": [
+        "src/app/widget/lib/CanvasDigitalGauge.js",
+        "src/app/api/data-aggregator.js",
+        "src/app/api/subscription.js",
+        "src/app/api/datasource.service.js",
+        "src/app/widget/lib/map-widget.js",
+        "src/app/widget/lib/map-widget2.js",
+        "src/app/widget/lib/image-map.js",
+        "src/app/widget/lib/entities-hierarchy-widget.js"
+      ],
+      "folders": [
+        "src/app/api",
+        "src/app/widget/lib"
+      ]
+    },
+    {
+      "id": "rpc-control",
+      "title": "Remotely control a device via dashboard widgets",
+      "actor": "Customer",
+      "description": "Interact with a physical device from a dashboard using knob, switch, and multi-input-form widgets that issue RPC commands, with status indicators reflecting the device's current state.",
+      "steps": [
+        "Customer opens a dashboard containing an RPC control widget",
+        "Customer adjusts a knob, toggles a switch/round-switch, or fills in a multiple-input form",
+        "Widget sends an RPC command to the device through the platform",
+        "An LED indicator on the dashboard reflects the device's current reported state"
+      ],
+      "evidence": "Knob/KnobController (src/app/widget/lib/rpc/knob.directive.js), Switch/SwitchController (src/app/widget/lib/rpc/switch.directive.js), MultipleInputWidget (src/app/widget/lib/multiple-input-widget.js), LedIndicator",
+      "files": [
+        "src/app/widget/lib/rpc/knob.directive.js",
+        "src/app/widget/lib/rpc/switch.directive.js",
+        "src/app/widget/lib/rpc/round-switch.directive.js",
+        "src/app/widget/lib/rpc/led-indicator.directive.js",
+        "src/app/widget/lib/multiple-input-widget.js"
+      ],
+      "folders": [
+        "src/app/widget/lib",
+        "src/app/widget/lib/rpc"
+      ]
+    },
+    {
+      "id": "manage-alarms",
+      "title": "Monitor and manage alarms",
+      "actor": "Operator",
+      "description": "Watch for alarms raised by devices/entities in a filterable, customizable table, inspect their details, and acknowledge or clear them.",
+      "steps": [
+        "Operator views a table of alarms raised by devices/entities (AlarmsTableWidget)",
+        "Operator filters alarms by status via the alarm status filter panel",
+        "Operator customizes which columns are displayed via the display-columns panel",
+        "Operator opens the alarm details dialog to inspect a specific alarm",
+        "Operator acknowledges or clears the alarm"
+      ],
+      "evidence": "AlarmsTableWidget, AlarmsTableWidgetController, AlarmStatusFilterPanelController, DisplayColumnsPanelController (src/app/widget/lib/alarms-table-widget.js); AlarmDetailsDialogController",
+      "files": [
+        "src/app/widget/lib/alarms-table-widget.js",
+        "src/app/alarm/alarm-table.directive.js",
+        "src/app/alarm/alarm-details-dialog.controller.js",
+        "src/app/alarm/alarm-row.directive.js"
+      ],
+      "folders": [
+        "src/app/alarm",
+        "src/app/widget/lib"
+      ]
+    },
+    {
+      "id": "build-rulechains",
+      "title": "Build and test rule chains for device data processing",
+      "actor": "Tenant administrator",
+      "description": "Design the logic that filters, routes, and transforms incoming device data by linking rule nodes together, and validate custom scripts before deploying them.",
+      "steps": [
+        "Administrator creates a new rule chain (RuleChainController)",
+        "Administrator adds rule nodes that define filtering, enrichment, or routing logic (AddRuleNodeController)",
+        "Administrator connects rule nodes with links to define the message flow (AddRuleNodeLinkController)",
+        "Administrator configures each node's behavior and message filters",
+        "Administrator tests a node's script against sample telemetry before saving",
+        "Rule chain is saved and applied to incoming device data"
+      ],
+      "evidence": "RuleChainController, AddRuleNodeController, AddRuleNodeLinkController (src/app/rulechain/rulechain.controller.js); NodeScriptTestController",
+      "files": [
+        "src/app/rulechain/rulechain.controller.js",
+        "src/app/rulechain/add-rulechain.tpl.html",
+        "src/app/rulechain/add-rulenode.tpl.html",
+        "src/app/rulechain/link.directive.js",
+        "src/app/rulechain/script/node-script-test.controller.js"
+      ],
+      "folders": [
+        "src/app/rulechain",
+        "src/app/rulechain/script"
+      ]
+    },
+    {
+      "id": "manage-attributes-relations",
+      "title": "Manage entity attributes and relations",
+      "actor": "Tenant administrator",
+      "description": "View and edit key-value attributes on devices/entities, and define relationships between entities in the IoT hierarchy.",
+      "steps": [
+        "Administrator opens an entity's attribute table",
+        "Administrator adds or edits an attribute value, including raw JSON",
+        "Administrator creates or edits a relation between two entities",
+        "Administrator filters and browses relations by type or direction"
+      ],
+      "evidence": "AttributeTableDirective, RelationDialogController",
+      "files": [
+        "src/app/entity/attribute/attribute-table.directive.js",
+        "src/app/entity/attribute/add-attribute-dialog.controller.js",
+        "src/app/entity/relation/relation-dialog.controller.js",
+        "src/app/entity/relation/relation-table.directive.js"
+      ],
+      "folders": [
+        "src/app/entity/attribute",
+        "src/app/entity/relation"
+      ]
+    },
+    {
+      "id": "configure-gateway-integrations",
+      "title": "Configure gateway connectors and protocol integrations",
+      "actor": "Tenant administrator",
+      "description": "Bridge external devices and protocols (HTTP, Modbus, MQTT, OPC-UA) into the platform by configuring gateway connector settings and managing protocol extensions.",
+      "steps": [
+        "Administrator opens gateway configuration for a device (GatewayConfigController)",
+        "Administrator selects a connector configuration template via the gateway form",
+        "Administrator fills in protocol-specific connection settings (HTTP/MQTT/Modbus/OPC-UA)",
+        "Administrator manages available protocol extensions in the extension table",
+        "Configuration is saved to bridge the external device into the platform"
+      ],
+      "evidence": "GatewayConfig, GatewayConfigController, GatewayDialogController (src/app/components/gateway/gateway-config.directive.js); GatewayForm, GatewayFormController (src/app/components/gateway/gateway-form.directive.js); ExtensionTableDirective, ExtensionTableController",
+      "files": [
+        "src/app/components/gateway/gateway-config.directive.js",
+        "src/app/components/gateway/gateway-form.directive.js",
+        "src/app/extension/extension-table.directive.js",
+        "src/app/extension/extensions-forms/extension-form-mqtt.directive.js",
+        "src/app/extension/extensions-forms/extension-form-modbus.directive.js"
+      ],
+      "folders": [
+        "src/app/components/gateway",
+        "src/app/extension",
+        "src/app/extension/extensions-forms"
+      ]
+    },
+    {
+      "id": "manage-tenant-customer-accounts",
+      "title": "Administer tenant and customer accounts",
+      "actor": "System administrator",
+      "description": "Set up and maintain the organizational structure of the multi-tenant platform, from top-level tenants down to their customers.",
+      "steps": [
+        "Administrator adds a new tenant organization",
+        "Administrator browses and edits tenant details",
+        "Within a tenant, administrator adds a new customer",
+        "Administrator edits customer details and browses the customer list",
+        "Devices, assets, dashboards, and entity views are assigned to customers for scoped access"
+      ],
+      "evidence": "TenantController, CustomerController",
+      "files": [
+        "src/app/tenant/add-tenant.tpl.html",
+        "src/app/tenant/tenant.controller.js",
+        "src/app/customer/add-customer.tpl.html",
+        "src/app/customer/customer.controller.js"
+      ],
+      "folders": [
+        "src/app/customer",
+        "src/app/tenant"
+      ]
+    },
+    {
+      "id": "manage-users",
+      "title": "Manage platform user accounts",
+      "actor": "System administrator",
+      "description": "Create new user accounts and let those users activate access to the platform.",
+      "steps": [
+        "Administrator adds a new user account",
+        "Platform sends an activation link to the new user",
+        "User activates the account and sets a password",
+        "Administrator browses and manages the list of platform users"
+      ],
+      "evidence": "AddUserController, ActivationLinkDialogController",
+      "files": [
+        "src/app/user/add-user.controller.js",
+        "src/app/user/activation-link.controller.js",
+        "src/app/user/user-fieldset.tpl.html"
+      ],
+      "folders": [
+        "src/app/user"
+      ]
+    },
+    {
+      "id": "audit-events",
+      "title": "Review audit logs and system events",
+      "actor": "System administrator",
+      "description": "Track a history of actions taken across the platform and inspect device/rule-processing events for troubleshooting.",
+      "steps": [
+        "Administrator opens the audit log screen",
+        "Administrator browses a table of recorded platform actions",
+        "Administrator opens a specific audit log entry to view details",
+        "Administrator reviews related device/rule-node events (errors, lifecycle, debug traces) to diagnose issues"
+      ],
+      "evidence": "AuditLogsController, EventTableDirective",
+      "files": [
+        "src/app/audit/audit-log-table.directive.js",
+        "src/app/audit/audit-log-details-dialog.controller.js",
+        "src/app/event/event-header.directive.js",
+        "src/app/event/event-content-dialog.controller.js"
+      ],
+      "folders": [
+        "src/app/audit",
+        "src/app/event"
+      ]
+    }
+  ]
+}

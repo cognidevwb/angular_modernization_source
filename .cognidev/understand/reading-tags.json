@@ -1,0 +1,604 @@
+{
+ "src/app/widget/lib/widget-utils.js": {
+  "sha": "1812f8515f5632a4ea0a25a67a929e2ca99f00c2722cfc8ebab6f510b92b875b",
+  "pv": 1,
+  "tag": {
+   "role": "util",
+   "one_liner": "Helper functions for widget pattern text processing, action link/button HTML generation, and value formatting.",
+   "teaches": [
+    "variable pattern regex extraction (${...})",
+    "mapping datasource dataKeys to values",
+    "generating link/button action HTML tags",
+    "value/number formatting helpers"
+   ],
+   "read_before": [],
+   "centrality": 4
+  }
+ },
+ "src/app/api/data-aggregator.js": {
+  "sha": "07ab6423055c20e7e4511d96a1554da117669fb227d85911051a0f023cd14520",
+  "pv": 1,
+  "tag": {
+   "role": "util",
+   "one_liner": "Aggregates time-series telemetry data into time windows using min/max/avg/sum/count functions for chart display.",
+   "teaches": [
+    "time-window data aggregation pattern",
+    "aggregation function strategies (min/max/avg/sum/count/none)",
+    "buffered data reset and interval scheduling with $timeout"
+   ],
+   "read_before": [],
+   "centrality": 3
+  }
+ },
+ "src/app/common/types.constant.js": {
+  "sha": "ede05f83fa66f4c10151cebfde60b747897700f7a02d9c1e5c58a1f557c8cd09",
+  "pv": 1,
+  "tag": {
+   "role": "config",
+   "one_liner": "Angular constant module defining shared enums/lookup tables (error codes, aggregation types, alarm fields, etc.) used across ThingsBoard UI.",
+   "teaches": [
+    "app-wide constant/enum conventions",
+    "server error code mapping",
+    "alarm/aggregation domain vocabulary",
+    "AngularJS constant module pattern"
+   ],
+   "read_before": [],
+   "centrality": 4
+  }
+ },
+ "src/app/api/user.service.js": {
+  "sha": "bc94791d388796143f021d97c53397e398fb43c9cdd00e37cf8482fc578514b6",
+  "pv": 1,
+  "tag": {
+   "role": "service",
+   "one_liner": "Angular service managing user auth state, JWT tokens, session/user CRUD, and navigation for logged-in user.",
+   "teaches": [
+    "JWT token lifecycle: decode, store, validate, refresh",
+    "current-user/session state management pattern",
+    "auth header injection for HTTP requests",
+    "role-based navigation (default place, public dashboards)"
+   ],
+   "read_before": [
+    "src/app/api/login.service.js"
+   ],
+   "centrality": 5
+  }
+ },
+ "src/app/components/json-form.directive.js": {
+  "sha": "ea96a1ca255dbdd00398a457a56769ccb62aef305ed4b5145639ed284941fabd",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS directive 'tbJsonForm' that renders dynamic forms from JSON schema, bridging to a React schema-form component.",
+   "teaches": [
+    "AngularJS directive wrapping a React component",
+    "JSON-schema-driven dynamic form rendering",
+    "model watch/recompile lifecycle in Angular directives",
+    "color/icon picker dialog integration"
+   ],
+   "read_before": [
+    "src/app/components/react/json-form-react.jsx",
+    "src/app/components/material-icons-dialog.controller.js"
+   ],
+   "centrality": 3
+  }
+ },
+ "src/app/widget/lib/CanvasDigitalGauge.js": {
+  "sha": "f13024eb465d444eb7ab5d999bbe79d9cb3483429a7eb9eaaea39fd517ada53e",
+  "pv": 1,
+  "tag": {
+   "role": "util",
+   "one_liner": "Custom canvas-based digital gauge widget class extending canvas-gauges for rendering value/progress displays.",
+   "teaches": [
+    "extending canvas-gauges BaseGauge",
+    "canvas cloning for double-buffered rendering",
+    "gauge option configuration/defaults",
+    "color and font styling for gauge elements"
+   ],
+   "read_before": [],
+   "centrality": 3
+  }
+ },
+ "src/app/components/ace-editor-fix.js": {
+  "sha": "c5b81194ad4507ebe6dfeeee0375825720f9a717ca11db2598b54176528e3a04",
+  "pv": 1,
+  "tag": {
+   "role": "util",
+   "one_liner": "Patches Ace Editor to fix scrolling and detach gutter tooltips when their DOM element is removed.",
+   "teaches": [
+    "Ace editor internals patching",
+    "MutationObserver to detect element removal",
+    "workaround for tooltip DOM attachment"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/components/grid.directive.js": {
+  "sha": "34c0c3b7069448f7fa2be6f6826cf848fec2f21bc449bafab98099899cb65564",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "Angular directive implementing a reusable data grid with paging, item cards, add-item dialog, and card content templating.",
+   "teaches": [
+    "custom AngularJS directive composition",
+    "dynamic controller binding via $controller for templated item cards",
+    "grid/paging UI pattern with range filter",
+    "integration with sidenav and scope-element directives"
+   ],
+   "read_before": [
+    "src/app/components/scope-element.directive.js",
+    "src/app/components/details-sidenav.directive.js"
+   ],
+   "centrality": 3
+  }
+ },
+ "src/app/components/react/json-form-base-component.jsx": {
+  "sha": "b94dba55c18942addbe9b1a129d4987ac6335ae2ea0d1b3274bd492a8e8dd664",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "React HOC that adds value state, default-value resolution, and schema validation to react-schema-form form components",
+   "teaches": [
+    "higher-order component pattern in React",
+    "react-schema-form value/validation lifecycle",
+    "type-based value coercion (boolean/number/date/array/string)",
+    "default value resolution from form/schema config"
+   ],
+   "read_before": [],
+   "centrality": 4
+  }
+ },
+ "src/app/common/utils.service.js": {
+  "sha": "cd825c911f7302c1adbf6cca768706eba9083f66e513f1c210bb54da8534168f",
+  "pv": 1,
+  "tag": {
+   "role": "util",
+   "one_liner": "Angular utility service providing colors, icons, predefined widget functions, schema defaults, and misc helper logic used across ThingsBoard UI.",
+   "teaches": [
+    "material color palette generation",
+    "predefined data key functions (Sin/Cos/Random)",
+    "material icon codepoint handling",
+    "shared Angular utils factory pattern"
+   ],
+   "read_before": [
+    "src/app/common/types.constant.js",
+    "src/app/common/utf8-support.js"
+   ],
+   "centrality": 4
+  }
+ },
+ "src/app/services/toast.js": {
+  "sha": "2132c4110d181f2934e02b584c2108a5634b6d20a804aeaba5b330f0aac1cb36",
+  "pv": 1,
+  "tag": {
+   "role": "wiring",
+   "one_liner": "Angular module definition that wires together the toast service and controller into a reusable notification module.",
+   "teaches": [
+    "Angular module bundling pattern",
+    "factory/controller registration",
+    "module composition with .name export"
+   ],
+   "read_before": [
+    "src/app/services/toast.service.js",
+    "src/app/services/toast.controller.js"
+   ],
+   "centrality": 3
+  }
+ },
+ "src/app/api/subscription.js": {
+  "sha": "39f311018e971918d00bf5951fc478a9e8e1746cbcf2754d6b018931b99ee69f",
+  "pv": 1,
+  "tag": {
+   "role": "domain",
+   "one_liner": "ThingsBoard widget Subscription class managing RPC, alarm, and data subscriptions for dashboard widgets",
+   "teaches": [
+    "subscription lifecycle for widget types (rpc/alarm/data)",
+    "callback-driven data flow with deferred promises",
+    "timewindow configuration handling",
+    "device alias/id targeting for RPC calls"
+   ],
+   "read_before": [],
+   "centrality": 4
+  }
+ },
+ "src/app/api/widget.service.js": {
+  "sha": "918bb49942df130d8afa509bc7ceef0e170f4653c4269095dea534e6576ae681",
+  "pv": 1,
+  "tag": {
+   "role": "service",
+   "one_liner": "Angular service that registers/loads widget type modules and manages caching, lazy-loading, and bundle retrieval for ThingsBoard widgets.",
+   "teaches": [
+    "widget module registration pattern",
+    "lazy-loading external libs onto window (jquery, moment, gauges, maps)",
+    "in-memory caching of widget info/type functions",
+    "widgets bundle fetch/invalidate lifecycle"
+   ],
+   "read_before": [
+    "src/app/common/types.constant.js",
+    "src/app/common/utils.service.js"
+   ],
+   "centrality": 4
+  }
+ },
+ "src/app/components/react/json-form-ace-editor.jsx": {
+  "sha": "e4c7675957b0a33dc95278e9cdd34ae286e30a7c29f2b808e6a7bd93e7c616f4",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "React AceEditor-based JSON schema form field for editing raw text/code (JSON, JS, etc.) with tidy/fullscreen support",
+   "teaches": [
+    "wrapping react-ace with ThingsboardBaseComponent HOC pattern",
+    "form field lifecycle: value change, blur/focus, validation callback",
+    "fullscreen toggle triggering editor resize on componentDidUpdate",
+    "applying an ace-editor-fix hook on editor load"
+   ],
+   "read_before": [
+    "src/app/components/react/json-form-base-component.jsx",
+    "src/app/components/ace-editor-fix.js"
+   ],
+   "centrality": 2
+  }
+ },
+ "src/app/services/menu.service.js": {
+  "sha": "6e7ff14c3186b14df9b77b21c889d11ab0397039f81311597a2470d2586d7be6",
+  "pv": 1,
+  "tag": {
+   "role": "service",
+   "one_liner": "Angular factory that builds role-based navigation menu sections from the current user's authority.",
+   "teaches": [
+    "role-based menu construction",
+    "reacting to auth state via $rootScope events",
+    "AngularJS factory pattern with /*@ngInject*/"
+   ],
+   "read_before": [
+    "src/app/api/user.service.js"
+   ],
+   "centrality": 3
+  }
+ },
+ "src/app/url.handler.js": {
+  "sha": "e1194a1b646d31fd9985bdef88a9fa7498c81e0c16a58e9f83c90776f289ca97",
+  "pv": 1,
+  "tag": {
+   "role": "wiring",
+   "one_liner": "Redirects user to their default place once user data is loaded via AngularJS rootScope event.",
+   "teaches": [
+    "waiting for async user load via $rootScope events",
+    "userService default place routing",
+    "AngularJS $injector-based dependency access"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/api/alias-controller.js": {
+  "sha": "8784e3e98546483bea8e1261104aa2aaf7962a9c3db3fc1d7ddeed345f727609",
+  "pv": 1,
+  "tag": {
+   "role": "domain",
+   "one_liner": "AngularJS controller managing entity alias resolution and state binding for dashboard widgets",
+   "teaches": [
+    "entity alias resolution/caching pattern",
+    "dashboard state-to-entity binding",
+    "promise-based lazy resolution with invalidation via broadcast events"
+   ],
+   "read_before": [],
+   "centrality": 4
+  }
+ },
+ "src/app/api/device.service.js": {
+  "sha": "cf718b68673174ef70ada1b090201700ade56a78bb4132de5d2c22d208265308",
+  "pv": 1,
+  "tag": {
+   "role": "api",
+   "one_liner": "Angular service wrapping REST API calls for device CRUD, credentials, attributes, RPC commands, and claiming.",
+   "teaches": [
+    "HTTP API abstraction via $http and $q",
+    "device attribute subscribe/unsubscribe pattern",
+    "paginated query URL building",
+    "RPC command invocation"
+   ],
+   "read_before": [
+    "src/app/common/types.constant.js"
+   ],
+   "centrality": 4
+  }
+ },
+ "src/app/common/utf8-support.js": {
+  "sha": "f091a71a757e48f5835691093b587314217be1920e012469e276dc5bc300ce50",
+  "pv": 1,
+  "tag": {
+   "role": "util",
+   "one_liner": "Utility functions for encoding/decoding strings to/from UTF-8 byte arrays.",
+   "teaches": [
+    "UTF-8 encoding/decoding algorithms",
+    "surrogate pair handling",
+    "byte-level string manipulation"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/components/confirm-on-exit.directive.js": {
+  "sha": "93b343061b5dab12a69e927cff91df162c104d870cc37eb43ee966bf11c26efb",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS directive that warns users about unsaved form changes before navigating away or closing the tab.",
+   "teaches": [
+    "directive linking with form dirty state",
+    "window.onbeforeunload usage",
+    "$stateChangeStart interception",
+    "$mdDialog confirm pattern"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/components/datakey-config-dialog.controller.js": {
+  "sha": "1ea69505309cbeacd225512535f51d53d072f5ac8cd8aad464f0477578ef451d",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "Angular controller for a modal dialog that configures a data key's settings, including fetching entity key suggestions.",
+   "teaches": [
+    "mdDialog controller pattern (hide/cancel/save)",
+    "async entity key fetching via aliasController and entityService",
+    "form validation before dialog close ($scope.theForm)"
+   ],
+   "read_before": [
+    "src/app/components/datakey-config.directive.js"
+   ],
+   "centrality": 2
+  }
+ },
+ "src/app/components/expand-fullscreen.directive.js": {
+  "sha": "7573062005e0f0b1f8431f81168cf5cb5bb766111f0ce125f9fc87de60086406",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS directive that toggles fullscreen display of an element by detaching it into a body-level container.",
+   "teaches": [
+    "custom Angular directive with linker function",
+    "DOM detach/reattach for fullscreen toggling",
+    "scope watchers for expand/collapse state",
+    "jQuery + Angular element manipulation"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/widget/lib/map-widget.js": {
+  "sha": "b64442c17a12ce740e2fefdd6358d5731177431b557a8548a850ad5e05a50325",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "Widget class rendering location/markers on a map (Google or OpenStreetMap) with tooltip pattern binding.",
+   "teaches": [
+    "tooltip pattern variable substitution from datasource keys",
+    "abstraction over map providers via TbGoogleMap/TbOpenStreetMap",
+    "marker/polyline/route management for map widgets"
+   ],
+   "read_before": [
+    "src/app/widget/lib/google-map.js",
+    "src/app/widget/lib/openstreet-map.js"
+   ],
+   "centrality": 3
+  }
+ },
+ "src/app/widget/lib/openstreet-map.js": {
+  "sha": "2db177b9435672ba10315d583dbf9dc38b061bbabd339721e9bf5f044a30c644",
+  "pv": 1,
+  "tag": {
+   "role": "util",
+   "one_liner": "Wraps Leaflet to provide an OpenStreetMap map widget with markers, clustering, tooltips, and icon management.",
+   "teaches": [
+    "Leaflet map initialization and tile providers",
+    "custom marker icons and clustering with leaflet.markercluster",
+    "marker tooltip/label binding patterns"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/api/customer.service.js": {
+  "sha": "ad90f1570573821cb4ed7216a74d70006b6b8abab6efc8d6ba6e48dd5a4dce32",
+  "pv": 1,
+  "tag": {
+   "role": "api",
+   "one_liner": "AngularJS service wrapping HTTP calls to backend customer endpoints (list, get, save, delete customers).",
+   "teaches": [
+    "AngularJS factory pattern with $q deferred promises",
+    "REST endpoint conventions for customer resources",
+    "recursive async loading pattern for enriching items with assigned customer info"
+   ],
+   "read_before": [],
+   "centrality": 3
+  }
+ },
+ "src/app/api/login.service.js": {
+  "sha": "871890fe7f917c2a10b9e33512f5d5a652a7e02d766429d9bcf2bbcd638fba58",
+  "pv": 1,
+  "tag": {
+   "role": "api",
+   "one_liner": "AngularJS service wrapping HTTP calls for login, logout-related auth actions like password reset and account activation.",
+   "teaches": [
+    "Angular factory/service pattern with $q promises",
+    "REST endpoints for auth (login, activate, reset password)",
+    "public/anonymous login flow"
+   ],
+   "read_before": [],
+   "centrality": 4
+  }
+ },
+ "src/app/components/contact.directive.js": {
+  "sha": "adc61a2c25c1d61dfea976633f818bb41a3491d4b3f96cd281e4173da5bfb89f",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS directive rendering a contact form/list with country dropdown and template compilation.",
+   "teaches": [
+    "AngularJS directive definition pattern",
+    "template caching and dynamic compilation via $compile",
+    "static country list data embedding in UI components"
+   ],
+   "read_before": [],
+   "centrality": 1
+  }
+ },
+ "src/app/components/dashboard.directive.js": {
+  "sha": "de2bee6579d9fe8773aaa5f724e685df39b0595a5fe02a6fae5fdc2bb1e1e16d",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "Angular directive rendering the gridster-based dashboard grid that lays out and controls widgets.",
+   "teaches": [
+    "dashboard widget grid layout via angular-gridster",
+    "dashboard controller bindings for edit/export/remove widget actions",
+    "widget context menu and mouse interaction handling",
+    "integration of timewindow, toast, and widget services into dashboard state"
+   ],
+   "read_before": [
+    "src/app/components/widget/widget.directive.js",
+    "src/app/api/widget.service.js",
+    "src/app/common/types.constant.js"
+   ],
+   "centrality": 4
+  }
+ },
+ "src/app/components/details-sidenav.directive.js": {
+  "sha": "37d81bf247697332f8638a669388bc596b53168140a1403252e713430d187988",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS directive implementing a slide-in details sidenav panel with backdrop and open/close animation.",
+   "teaches": [
+    "custom Angular directive with linker function",
+    "backdrop creation via $mdUtil and $animate",
+    "scope watch-driven open/close state handling",
+    "positioning logic for scrollable containers"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/components/timewindow.directive.js": {
+  "sha": "1ef3da82846ca78e65fc902b9a05f5d46057efaca9b68448e971873e4a1ad660",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS directive providing a time window picker (realtime/history) UI with edit panel and aggregation options.",
+   "teaches": [
+    "ngModel-based directive design",
+    "time window data model (realtime/history/aggregation)",
+    "using $mdPanel for popup editing UI",
+    "composing sub-directives (timeinterval, datetime-period)"
+   ],
+   "read_before": [
+    "src/app/components/timeinterval.directive.js",
+    "src/app/components/datetime-period.directive.js",
+    "src/app/components/timewindow-panel.controller.js"
+   ],
+   "centrality": 3
+  }
+ },
+ "src/app/extension/extension-dialog.controller.js": {
+  "sha": "e66b4cf3ee668cdd9f30e63afed53f509ef835a9b51fdbc27bf3410296274117",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS controller for a dialog that adds/edits a device extension (HTTP/MQTT/OPC UA/MODBUS) and saves it as an entity attribute.",
+   "teaches": [
+    "mdDialog controller pattern with $mdDialog inject",
+    "extension type-specific configuration shapes",
+    "form validation scroll-to-error UX",
+    "saving via attributeService.saveEntityAttributes"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/widget/lib/google-map.js": {
+  "sha": "244670a6e483ed557085bf2c998fe64970578c08187d8dd75cefec7044d2350e",
+  "pv": 1,
+  "tag": {
+   "role": "util",
+   "one_liner": "Wraps the Google Maps JS API to render a map widget with markers, clustering, and tooltips.",
+   "teaches": [
+    "Google Maps API integration",
+    "dynamic script loading for map libraries",
+    "marker clustering setup",
+    "map widget lifecycle management"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/components/material-icons-dialog.controller.js": {
+  "sha": "6f1ef644d148537675d305e4765c0e11adf244b54ce08075e8763e70e3f52412",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS dialog controller for picking a Material Design icon from a searchable/full list.",
+   "teaches": [
+    "Angular dialog controller pattern ($mdDialog)",
+    "watching scope vars to lazy-load icon list",
+    "using $timeout to defer async icon loading",
+    "returning dialog result via $mdDialog.hide"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/admin/index.js": {
+  "sha": "e6f741782c9f33d288af46dfc64f209cc70d87a17e7d3ebf9d06592406f7029d",
+  "pv": 1,
+  "tag": {
+   "role": "wiring",
+   "one_liner": "Angular module definition wiring admin routes, controllers, and services into the 'thingsboard.admin' module.",
+   "teaches": [
+    "Angular module composition pattern",
+    "how routes/controllers/services are bundled per feature",
+    "AngularJS module dependency declaration"
+   ],
+   "read_before": [
+    "src/app/admin/admin.routes.js",
+    "src/app/admin/admin.controller.js",
+    "src/app/api/admin.service.js"
+   ],
+   "centrality": 2
+  }
+ },
+ "src/app/alarm/alarm-details-dialog.controller.js": {
+  "sha": "6616d35c8d45218b6d86e84d2ae7614708de177cd3f56e84518d11e86ea70e59",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS controller for a modal dialog showing alarm details, JSON editor, and acknowledge/clear actions.",
+   "teaches": [
+    "Angular dialog controller pattern with $mdDialog and showingCallback",
+    "loading alarm data via alarmService and formatting timestamps",
+    "using ace editor (brace) with js-beautify for JSON display",
+    "acknowledge/clear alarm workflow"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ },
+ "src/app/alarm/alarm-row.directive.js": {
+  "sha": "3a9d5ea1c071d68e86b8e9326b15d29cc9e83407c133660ef49fa8836b81fd3f",
+  "pv": 1,
+  "tag": {
+   "role": "ui",
+   "one_liner": "AngularJS directive rendering a single alarm row with a click handler to open the alarm details dialog",
+   "teaches": [
+    "custom directive with link function and template caching",
+    "opening mdDialog with locals and callbacks",
+    "basic alarm row UI wiring in ThingsBoard"
+   ],
+   "read_before": [],
+   "centrality": 2
+  }
+ }
+}
